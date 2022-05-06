@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>map</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+        #map {
+            width:100vw;
+            height:100vh;
+        }
+    </style>
+</head>
+<body>
+<div style="position: absolute; top: 90%; left: 90%; z-index: 10; padding: 10px">
+    <button style="font-size: 1.2em;" onclick="viewMarker()"> 마커보이기 </button>
+    <button style="font-size: 1.2em;" onclick="removeMarker()"> 마커감추기 </button>
+</div>
+<!-- 지도를 표시할 div 입니다 -->
+<div id="map"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=26379676c982d4d975ccee24531321d2"></script>
+<script>
+
+    let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = { 
+            center: new kakao.maps.LatLng(36.545148325900975, 128.79394521640884), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    // 지도를 생성
+    let map = new kakao.maps.Map(mapContainer, mapOption); 
+    let markers = [];
+
+    // 마커지우기
+    function removeMarker() {
+        let cnt = markers.length;
+        for(i=0; i<cnt; i++) {
+            markers[i].setMap(null);
+        }
+    }
+
+    // 마커보이기
+    function viewMarker() {
+
+        // var bounds = map.getBounds();
+        // var sw = bounds.getSoutWest(); // 오른쪽 아래 좌표값
+        // var ne = bounds.getNortEast(); // 왼쪽 위 좌표값
+
+        // lat1 = sw.Ha;
+        // lng1 = sw.Ga;
+        // lat2 = ne.Ha;
+        // lng2 = ne.Ga;
+
+        $.get("get.php", function(positions) {
+            console.log(positions);
+            console.log(positions.length);
+            $(positions).map(function(i, position) {
+                let a = new kakao.maps.Marker({
+                    map : map,
+                    position: new kakao.maps.LatLng(position.lat, position.lng)
+                });
+                markers.push(a);
+                return a;
+            })
+        });
+    }
+
+    // 드래그 시 마커 새로고침
+    kakao.maps.event.addListener(map, 'zoom_changed', function() {
+        // console.log('확대/축소');
+        chkArea();
+    });
+    kakao.maps.event.addListener(map, 'dragend', function() {
+        // console.log('그래그가 끝났을때');
+        chkArea();
+    });
+    function chkArea() {
+        removeMarker();
+        viewMarker();
+
+        var bounds = map.getBounds();
+
+        console.log(bounds);
+
+        // var ne = bounds.getNortEast();
+        // var sw = bounds.getSoutWest(); 
+
+        // lat1 = sw.Ha;
+        // lng1 = sw.Ga;
+        // lat2 = ne.Ha;
+        // lng2 = ne.Ga;
+
+
+    }
+
+    // 시작화면 마커 표시
+    $(document).ready(function() {
+        viewMarker();
+    });
+
+
+
+    // 마커 여러개 표시하기
+    // $(document).ready(function() {
+    //     console.log("start");
+
+    //     $.get("get.php", function(positions) {
+            
+    //         // 마커 이미지의 이미지 주소입니다
+    //         var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+
+    //         for (var i = 0; i < positions.length; i ++) {
+            
+    //             // 마커 이미지의 이미지 크기 입니다
+    //             var imageSize = new kakao.maps.Size(24, 35); 
+                
+    //             // 마커 이미지를 생성합니다    
+    //             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+                
+    //             var latlng = new kakao.maps.LatLng(positions[i].lat, positions[i].lng);
+
+
+    //             // 마커를 생성합니다
+    //             var marker = new kakao.maps.Marker({
+    //                 map: map, // 마커를 표시할 지도
+    //                 position: latlng, // 마커를 표시할 위치
+    //                 title : positions[i].dong, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+    //                 image : markerImage // 마커 이미지 
+    //             });
+    //         }
+    //     });
+    // })
+
+</script>
+</body>
+</html>
