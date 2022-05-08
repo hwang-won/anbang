@@ -14,6 +14,15 @@
             width:100vw;
             height:100vh;
         }
+        .CustomOverlay {
+            width: 100%;
+            height: 100%;
+            background-color: rgb(188, 188, 255);
+            border-radius: 20px;
+            box-shadow: 0 0 3px;
+            font-size: 15px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -48,22 +57,25 @@
     // 마커보이기
     function viewMarker() {
 
-        // var bounds = map.getBounds();
-        // var sw = bounds.getSoutWest(); // 오른쪽 아래 좌표값
-        // var ne = bounds.getNortEast(); // 왼쪽 위 좌표값
+        let bounds = map.getBounds();
+        let swLatLng = bounds.getSouthWest();
+        let neLatLng = bounds.getNorthEast(); 
+        let level = map.getLevel();
+        console.log(level);
 
-        // lat1 = sw.Ha;
-        // lng1 = sw.Ga;
-        // lat2 = ne.Ha;
-        // lng2 = ne.Ga;
+        lat1 = swLatLng.Ma;
+        lng1 = swLatLng.La;
+        lat2 = neLatLng.Ma;
+        lng2 = neLatLng.La;
 
-        $.get("get.php", function(positions) {
+        $.get("get.php?lat1="+lat1+"&lng1="+lng1+"&lat2="+lat2+"&lng2="+lng2+"&level="+level, function(positions) {
             console.log(positions);
             console.log(positions.length);
             $(positions).map(function(i, position) {
-                let a = new kakao.maps.Marker({
+                let a = new kakao.maps.CustomOverlay({
                     map : map,
-                    position: new kakao.maps.LatLng(position.lat, position.lng)
+                    position: new kakao.maps.LatLng(position.lat, position.lng),
+                    content: "<div class='CustomOverlay'>"+ position.idx + "</div>"
                 });
                 markers.push(a);
                 return a;
@@ -83,20 +95,6 @@
     function chkArea() {
         removeMarker();
         viewMarker();
-
-        var bounds = map.getBounds();
-
-        console.log(bounds);
-
-        // var ne = bounds.getNortEast();
-        // var sw = bounds.getSoutWest(); 
-
-        // lat1 = sw.Ha;
-        // lng1 = sw.Ga;
-        // lat2 = ne.Ha;
-        // lng2 = ne.Ga;
-
-
     }
 
     // 시작화면 마커 표시
