@@ -62,13 +62,24 @@
                             <a href="list.php">목록</a>
 
                             <div style="float:right;">
-                                <a href="del.php?idx=<?php echo $idx?>" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+                                <a href="#" onclick="chkPassword();">삭제</a>
                                 <a href="write.php?idx=<?php echo $idx?>">수정</a>
                             </div>
                         </td>
                     </tr>
                 </table>
                 </form>
+                <script>
+                    function chkPassword() {
+                        var a = prompt('비밀번호를 입력해 주세요');
+                        
+                        if(a) {
+                            location.href='del.php?idx=<?php echo $idx?>&pwd='+a;
+                        } else {
+                            alert('비밀번호를 입력해야 삭제가 가능합니다.'); 
+                        }
+                    }
+                </script>
             </div>
         </section>
     </body>
