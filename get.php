@@ -17,7 +17,7 @@
 //    ";
 
     $limit = 10;
-    if($level==1) $limit = 50;
+    if($level==1) $limit = 70;
     if($level>=2) $limit = 100;
 
 
