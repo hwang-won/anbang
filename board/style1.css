@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    cursor: default;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    padding-left: 0;
+}
+
+li {
+    list-style: none;
+}
+
+table {
+    width: 100%;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px;
+    padding: 16px;
+    background-color: rgb(213, 213, 255);
+}
+
+.navbar__menu {
+    display: flex;
+}
+
+.navbar__menu__item {
+    padding: 8px 12px;
+    margin: 0 4px;
+}
+
+
+#board {
+    margin: 30px 30px 0px 30px;
+    padding: 16px 16px 0px 16px;
+    background-color: #d4ecfc;
+}
+
+.board__list {
+    height: 500px;
+}
+
+.board__list__table th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+    text-align: center;
+}
+
+.board__list__write th, tr {
+    border: 0;
+    text-align: center;
+}
+
+.board__list__write td {
+    border: 0;
+    text-align: left;
+}
+
+.board__write {
+    text-align: right;
+    margin: 0px 30px 30px 30px;
+    padding: 0px 16px 16px 16px;
+    background-color: #d4ecfc;
+}
+
+.board__list__write__button {
+    margin: 0px 30px 30px 30px;
+    padding: 0px 16px 16px 16px;
+    background-color: #d4ecfc;
+    display: flex;
+    justify-content: space-between;
+}
+
+.board__list__view  th, tr{
+    width: 10%;
+    text-align: center;
+    border-bottom: 1px solid #444444;
+}
+
+.board__list__view td {
+    text-align: left;
+}

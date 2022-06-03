@@ -9,15 +9,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style1.css" />
+    <script src="https://kit.fontawesome.com/7395e48b31.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap" rel="stylesheet">
     <title>안방</title>
 </head>
-<body>
     <body>
         <!-- navbar -->
         <nav id="navbar">
             <div class="navbar__logo">
-                <i></i>
+                <i class="fas fa-seedling"></i>
                 <a href="../index.html">안방</a>
             </div>
             <div>
@@ -29,9 +30,6 @@
                         <li class="navbar__menu__item">게시판</li>
                     </a>
                 </ul>
-            </div>
-            <div>
-                로그인
             </div>
         </nav>
     
@@ -61,9 +59,10 @@
                 </table>
             </div>
         </section>
-        <section >
-            <a href="write.php">글쓰기</a>
+        <section id="write">
+            <div class="board__write">
+                <a href="write.php">글쓰기</a>
+            </div>
         </section>
     </body>
-</body>
 </html>
